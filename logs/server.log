@@ -1,0 +1,74 @@
+2026-03-20 10:48:43 [INFO] [FileServer] Generating SSL certificate...
+2026-03-20 10:49:26 [INFO] [FileServer] Generating SSL certificate...
+2026-03-20 10:51:09 [INFO] [FileServer] Generating SSL certificate...
+2026-03-20 10:51:09 [INFO] [FileServer] Certificate generated: /home/fiend/WorkSpace/python/HttpsServer/server.pem
+2026-03-20 10:51:09 [INFO] [FileServer] HTTPS Server started on port 8443
+2026-03-20 10:52:16 [INFO] [FileServer] Using existing certificate: /home/fiend/WorkSpace/python/HttpsServer/server.pem
+2026-03-20 10:52:16 [INFO] [FileServer] HTTPS Server started on port 8443
+2026-03-20 11:05:16 [INFO] [FileServer] Server started on port 8443
+2026-03-20 11:07:48 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
+2026-03-20 11:11:38 [INFO] [FileServer] Raw POST upload: upload, type=application/x-www-form-urlencoded, size=947
+2026-03-20 11:11:38 [ERROR] [FileServer] Error handling POST: 'APIHandler' object has no attribute '_safe_filename'
+Traceback (most recent call last):
+  File "/home/fiend/WorkSpace/python/HttpsServer/api_handler.py", line 85, in handle
+    self.do_post()
+  File "/home/fiend/WorkSpace/python/HttpsServer/api_handler.py", line 205, in do_post
+    self.save_upload_raw(filename, self.rh.rfile, length)
+  File "/home/fiend/WorkSpace/python/HttpsServer/api_handler.py", line 216, in save_upload_raw
+    safe_name = self._safe_filename(filename)
+                ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'APIHandler' object has no attribute '_safe_filename'
+2026-03-20 11:14:50 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
+2026-03-20 11:15:10 [INFO] [FileServer] Starting raw upload: upload_20260320_111510.bin, 947 bytes, type=application/x-www-form-urlencoded
+2026-03-20 11:15:10 [ERROR] [FileServer] Error handling POST: name 'os' is not defined
+Traceback (most recent call last):
+  File "/home/fiend/WorkSpace/python/HttpsServer/api_handler.py", line 119, in handle
+    self.do_post()
+  File "/home/fiend/WorkSpace/python/HttpsServer/api_handler.py", line 266, in do_post
+    self.save_upload_raw(filename, self.rh.rfile, length)
+  File "/home/fiend/WorkSpace/python/HttpsServer/api_handler.py", line 274, in save_upload_raw
+    safe_name = self._safe_filename(filename)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/fiend/WorkSpace/python/HttpsServer/api_handler.py", line 33, in _safe_filename
+    filename = os.path.basename(filename)  # 只保留文件名部分
+               ^^
+NameError: name 'os' is not defined. Did you forget to import 'os'
+2026-03-20 11:16:20 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
+2026-03-20 11:16:39 [INFO] [FileServer] Starting raw upload: upload_20260320_111639.bin, 947 bytes, type=application/x-www-form-urlencoded
+2026-03-20 11:16:39 [INFO] [FileServer] Saving upload to: /home/fiend/WorkSpace/python/HttpsServer/uploads/upload_20260320_111639.bin (947 bytes)
+2026-03-20 11:16:39 [INFO] [FileServer] Upload complete: upload_20260320_111639.bin (947 bytes)
+2026-03-20 11:23:58 [INFO] [FileServer] Starting raw upload: upload_20260320_112358.bin, 947 bytes, type=text/xml; charset=utf-8
+2026-03-20 11:23:58 [INFO] [FileServer] Saving upload to: /home/fiend/WorkSpace/python/HttpsServer/uploads/upload_20260320_112358.bin (947 bytes)
+2026-03-20 11:23:58 [INFO] [FileServer] Upload complete: upload_20260320_112358.bin (947 bytes)
+2026-03-20 12:23:59 [INFO] [FileServer] Starting raw upload: upload_20260320_122359.bin, 947 bytes, type=text/xml; charset=utf-8
+2026-03-20 12:23:59 [INFO] [FileServer] Saving upload to: /home/fiend/WorkSpace/python/HttpsServer/uploads/upload_20260320_122359.bin (947 bytes)
+2026-03-20 12:23:59 [INFO] [FileServer] Upload complete: upload_20260320_122359.bin (947 bytes)
+2026-03-20 13:23:59 [INFO] [FileServer] Starting raw upload: upload_20260320_132359.bin, 947 bytes, type=text/xml; charset=utf-8
+2026-03-20 13:23:59 [INFO] [FileServer] Saving upload to: /home/fiend/WorkSpace/python/HttpsServer/uploads/upload_20260320_132359.bin (947 bytes)
+2026-03-20 13:23:59 [INFO] [FileServer] Upload complete: upload_20260320_132359.bin (947 bytes)
+2026-03-20 14:26:46 [INFO] [FileServer] Starting raw upload: cert_report_049226bed58e.xml, 947 bytes, type=text/xml; charset=utf-8
+2026-03-20 14:26:46 [INFO] [FileServer] Saving upload to: /home/fiend/WorkSpace/python/HttpsServer/uploads/cert_report_049226bed58e.xml (947 bytes)
+2026-03-20 14:26:46 [INFO] [FileServer] Upload complete: cert_report_049226bed58e.xml (947 bytes)
+2026-03-20 15:16:54 [INFO] [FileServer] Starting raw upload: cert_report_049226bed58e.xml, 947 bytes, type=text/xml; charset=utf-8
+2026-03-20 15:16:54 [INFO] [FileServer] Saving upload to: /home/fiend/WorkSpace/python/HttpsServer/uploads/cert_report_049226bed58e_1.xml (947 bytes)
+2026-03-20 15:16:54 [INFO] [FileServer] Upload complete: cert_report_049226bed58e_1.xml (947 bytes)
+2026-03-20 15:17:31 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
+2026-03-20 16:23:52 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
+2026-03-20 16:25:23 [INFO] [FileServer] Starting raw upload: cert_report_049226bed58e.xml, 947 bytes, type=text/xml; charset=utf-8
+2026-03-20 16:25:23 [INFO] [FileServer] Saving upload to: /home/fiend/WorkSpace/python/HttpsServer/uploads/cert_report_049226bed58e.xml (947 bytes)
+2026-03-20 16:25:23 [INFO] [FileServer] Upload complete: cert_report_049226bed58e.xml (947 bytes)
+2026-03-20 16:53:57 [INFO] [FileServer] Starting raw upload: cert_report_049226bed58e.xml, 747 bytes, type=text/xml; charset=utf-8
+2026-03-20 16:53:57 [INFO] [FileServer] Saving upload to: /home/fiend/WorkSpace/python/HttpsServer/uploads/cert_report_049226bed58e_1.xml (747 bytes)
+2026-03-20 16:53:57 [INFO] [FileServer] Upload complete: cert_report_049226bed58e_1.xml (747 bytes)
+2026-03-23 11:52:41 [INFO] [FileServer] HTTP Server on port 8080
+2026-03-23 11:52:41 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
+2026-03-23 11:54:58 [INFO] [FileServer] HTTP Server on port 8088
+2026-03-23 11:54:58 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
+2026-03-23 11:56:21 [INFO] [FileServer] HTTP Server on port 8088
+2026-03-23 11:56:21 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
+2026-03-23 11:58:14 [INFO] [FileServer] HTTP Server on port 8088
+2026-03-23 11:58:14 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
+2026-03-23 13:34:30 [INFO] [FileServer] HTTP Server on port 8088
+2026-03-23 13:34:30 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
+2026-03-23 13:43:01 [INFO] [FileServer] HTTP Server on port 8088
+2026-03-23 13:43:01 [INFO] [FileServer] HTTPS Server on port 8443 (TLS 1.2+)
