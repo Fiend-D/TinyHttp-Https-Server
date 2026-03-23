@@ -58,6 +58,7 @@ class AuthManager:
             if username in AUTH_CONFIG["users"]:
                 if AUTH_CONFIG["users"][username] == password:
                     role = "readonly" if username in AUTH_CONFIG.get("readonly_users", []) else "admin"
+                    role = "security" if username in AUTH_CONFIG.get("security_users", []) else role
                     auth_logger.info(f"Basic auth success: {username} ({role})")
                     return (username, role)
                 else:
@@ -98,6 +99,7 @@ class AuthManager:
         
         session.touch()
         role = "readonly" if session.username in AUTH_CONFIG.get("readonly_users", []) else "admin"
+        role = "security" if session.username in AUTH_CONFIG.get("security_users", []) else "admin"
         return (session.username, role)
     
     def destroy_session(self, token: str):

@@ -250,7 +250,8 @@ def main():
         print("❌ No server started. Use --http or --https")
         sys.exit(1)
     
-    print(f"\n📁 Upload directory: {SERVER_CONFIG['directory']}")
+    print(f"\n📁 Upload directory: {SERVER_CONFIG['directory'][0]}")
+    print(f"🔐 Security directory: {SERVER_CONFIG['directory'][1]}")
     print("Press Ctrl+C to stop\n")
     
     try:

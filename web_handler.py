@@ -9,7 +9,7 @@ import cgi
 from pathlib import Path
 
 from logger import server_logger, access_logger
-from config import SERVER_CONFIG, UPLOAD_DIR, STATIC_DIR, WEB_CONFIG
+from config import SERVER_CONFIG, UPLOAD_DIR, STATIC_DIR, WEB_CONFIG, SECURITY_DIR
 from auth import auth_manager, Session
 
 
@@ -214,10 +214,13 @@ class WebHandler:
     
     def api_list_files(self):
         """API: 列出文件"""
-        UPLOAD_DIR.mkdir(exist_ok=True)
+        files_path = UPLOAD_DIR
+        if self.role == "security":
+            files_path = SECURITY_DIR
+        files_path.mkdir(exist_ok=True)
         
         files = []
-        for f in UPLOAD_DIR.iterdir():
+        for f in files_path.iterdir():
             if f.is_file():
                 stat = f.stat()
                 files.append({
@@ -279,6 +282,8 @@ class WebHandler:
         
         # 保存
         target = UPLOAD_DIR / safe_name
+        if self.role == "security":
+            target = SECURITY_DIR / safe_name
         counter = 1
         original = target
         while target.exists():
@@ -312,8 +317,9 @@ class WebHandler:
         if not safe_name:
             self.send_json({"error": "Invalid filename"}, 400)
             return
-        
         target = UPLOAD_DIR / safe_name
+        if self.role == "security":
+            target = SECURITY_DIR / safe_name
         if not target.exists():
             self.send_json({"error": "Not found"}, 404)
             return
@@ -331,6 +337,8 @@ class WebHandler:
             return
         
         target = UPLOAD_DIR / safe_name
+        if self.role == "security":
+            target = SECURITY_DIR / safe_name
         if not target.exists():
             self.send_json({"error": "Not found"}, 404)
             return

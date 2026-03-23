@@ -8,12 +8,13 @@ from pathlib import Path
 
 # 基础路径
 BASE_DIR = Path(__file__).parent.absolute()
-UPLOAD_DIR = Path("/home/fiend/Downloads/serverPath")
+UPLOAD_DIR = Path("/home/fiend/Downloads/serverPath/work")
+SECURITY_DIR = Path("/home/fiend/Downloads/serverPath/fiend")
 STATIC_DIR = BASE_DIR / "static"
 LOGS_DIR = BASE_DIR / "logs"
 
 # # 确保目录存在
-for d in [UPLOAD_DIR, STATIC_DIR, LOGS_DIR]:
+for d in [UPLOAD_DIR, STATIC_DIR, LOGS_DIR, SECURITY_DIR]:
     d.mkdir(parents=True, exist_ok=True)
 
 # 服务器配置
@@ -21,7 +22,7 @@ SERVER_CONFIG = {
     "http_port": 8080,           # HTTP端口（0表示关闭）
     "https_port": 8443,          # HTTPS端口（0表示关闭）
     "host": "0.0.0.0",           # 监听地址
-    "directory": UPLOAD_DIR,  # 添加这一行！
+    "directory": [UPLOAD_DIR, SECURITY_DIR],  # 添加这一行！
     "ssl_cert": BASE_DIR / "server.pem",
     "ssl_key": None,             # 如果证书包含key则设为None
     
@@ -37,11 +38,13 @@ SERVER_CONFIG = {
 # 认证配置
 AUTH_CONFIG = {
     "users": {
-        "admin": "admin123",
-        "user1": "pass123",
+        "fiend": "52306",
+        "work": "123",
+        "admin":"admin",
         "1234": "1234",          # 测试用户，用户名和密码相同
         "readonly": "read123",    # 只读用户
     },
+    "security_users": ["fiend"],  # 这些用户只能访问安全目录
     "readonly_users": ["readonly"],  # 这些用户只有下载权限
     "session_timeout": 3600,      # Session过期时间（秒）
     "token_header": "X-Auth-Token", # API Token头

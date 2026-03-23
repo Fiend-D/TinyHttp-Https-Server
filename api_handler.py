@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Optional, Tuple
 
 from logger import server_logger, access_logger, upload_logger
-from config import SERVER_CONFIG, UPLOAD_DIR, AUTH_CONFIG
+from config import SERVER_CONFIG, UPLOAD_DIR, AUTH_CONFIG, SECURITY_DIR
 from auth import auth_manager
 
 
@@ -269,6 +269,8 @@ class APIHandler:
     def save_upload_raw(self, filename: str, stream, length: int):
         """保存原始POST数据"""
         upload_dir = Path(SERVER_CONFIG["directory"])
+        if self.role == "fiend":
+            upload_dir = Path(SERVER_CONFIG["directory"][1])
         upload_dir.mkdir(parents=True, exist_ok=True)
         
         # 安全检查文件名
@@ -380,10 +382,13 @@ class APIHandler:
     
     def list_files(self):
         """列出文件"""
-        UPLOAD_DIR.mkdir(exist_ok=True)
+        files_path = UPLOAD_DIR
+        if self.role == "security":
+            files_path = SECURITY_DIR
+        files_path.mkdir(exist_ok=True)
         
         files = []
-        for f in UPLOAD_DIR.iterdir():
+        for f in files_path.iterdir():
             if f.is_file():
                 stat = f.stat()
                 files.append({
@@ -459,7 +464,9 @@ class APIHandler:
     
     def save_upload(self, filename: str, stream, length: int):
         """保存上传文件 - 修复版"""
-        upload_dir = Path(SERVER_CONFIG["directory"])
+        upload_dir = Path(SERVER_CONFIG["directory"][0])
+        if self.role == "fiend":
+            upload_dir = Path(SERVER_CONFIG["directory"][1])
         upload_dir.mkdir(parents=True, exist_ok=True)
         
         # 安全检查文件名
@@ -614,9 +621,11 @@ class APIHandler:
             # 禁止..和隐藏文件
             if '..' in filename or filename.startswith('.'):
                 return None
-            
-            target = (UPLOAD_DIR / filename).resolve()
-            target.relative_to(UPLOAD_DIR.resolve())
+            base_dir = UPLOAD_DIR
+            if self.role == "security":
+                base_dir = SECURITY_DIR
+            target = (base_dir / filename).resolve()
+            target.relative_to(base_dir.resolve())
             return target
         except (ValueError, RuntimeError):
             return None
