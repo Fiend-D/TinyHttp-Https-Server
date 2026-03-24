@@ -38,7 +38,6 @@ SERVER_CONFIG = {
 # 认证配置
 AUTH_CONFIG = {
     "users": {
-        "fiend": "52306",
         "work": "123",
         "admin":"admin",
         "1234": "1234",          # 测试用户，用户名和密码相同

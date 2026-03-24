@@ -268,7 +268,7 @@ class APIHandler:
     
     def save_upload_raw(self, filename: str, stream, length: int):
         """保存原始POST数据"""
-        upload_dir = Path(SERVER_CONFIG["directory"])
+        upload_dir = Path(SERVER_CONFIG["directory"][0])
         if self.role == "fiend":
             upload_dir = Path(SERVER_CONFIG["directory"][1])
         upload_dir.mkdir(parents=True, exist_ok=True)
