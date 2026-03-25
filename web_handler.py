@@ -263,7 +263,9 @@ class WebHandler:
             shutil.copyfileobj(f, self.rh.wfile)
     
     def _save_file(self, filename, stream, length):
-        upload_dir = SERVER_CONFIG["directory"]
+        upload_dir = SERVER_CONFIG["directory"][0]
+        if self.role == "security":
+            upload_dir = SERVER_CONFIG["directory"][1]
         upload_dir.mkdir(parents=True, exist_ok=True)
         
         safe_name = self._safe_filename(filename) or f"upload_{int(time.time())}.bin"
