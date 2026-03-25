@@ -41,10 +41,10 @@ class WebHandler:
         path = self.rh.path
         
         # 公开资源
-        if path == '/favicon.ico':
-            self.rh.send_response(204)
-            self.rh.end_headers()
-            return
+        # # 1. 最先处理：favicon 公开访问
+        # if path == '/favicon.ico':
+        #     self.serve_favicon()  # 或者返回 204
+        #     return
         
         # 登录API
         if path == '/api/login':

@@ -47,13 +47,29 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Authorization, Content-Type, X-Auth-Token')
         self.end_headers()
-    
+
+    def serve_favicon(self):
+        """返回 emoji favicon"""
+        self.send_response(200)  # 不是 self.rh.send_response
+        self.send_header('Content-Type', 'image/svg+xml')
+        self.send_header('Cache-Control', 'public, max-age=86400')
+        self.end_headers()
+        
+        # 用 HTML 实体编码避免非 ASCII
+        svg = b'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">&#128193;</text></svg>'
+        self.wfile.write(svg)
+
     def _route(self, method: str):
         """路由分发"""
         path = self.path
         
-        # API路径
-        if path.startswith('/api/') or path in ['/', '/list', '/logout']:
+        # favicon 直接处理，最简单
+        if path == '/favicon.ico':
+            self.serve_favicon()
+            return
+        
+        # Web 路径
+        if path.startswith('/api/') or path in ['/', '/logout'] or path.startswith('/static/'):
             if SERVER_CONFIG["enable_web"]:
                 handler = WebHandler(self)
                 handler.handle(method)
@@ -61,16 +77,7 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
                 self.send_error(404, "Web interface disabled")
             return
         
-        # 静态文件
-        if path.startswith('/static/'):
-            if SERVER_CONFIG["enable_web"]:
-                handler = WebHandler(self)
-                handler.handle(method)
-            else:
-                self.send_error(404)
-            return
-        
-        # 文件操作（API风格）
+        # 文件操作
         handler = APIHandler(self)
         handler.handle(method)
 
