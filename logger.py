@@ -34,7 +34,7 @@ class ColoredFormatter(logging.Formatter):
 def setup_logger(name: str = "FileServer", 
                  log_file: str = "logs/server.log",
                  level: int = logging.INFO,
-                 max_bytes: int = 10*1024*1024,  # 10MB
+                 max_bytes: int = 10*1024,  # 1MB
                  backup_count: int = 5) -> logging.Logger:
     """
     设置日志记录器
